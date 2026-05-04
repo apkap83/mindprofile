@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Know thyself",
   description:
-    "A platform for self-discovery through psychology-inspired quizzes.",
+    "A platform for self-discovery through psychology-inspired quizzes!",
 };
 
 export default function RootLayout({
