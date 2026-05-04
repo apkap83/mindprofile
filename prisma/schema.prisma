@@ -1,0 +1,16 @@
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model QuizResult {
+  id        String   @id @default(cuid())
+  quizSlug  String
+  score     Int
+  result    String
+  answers   Json
+  createdAt DateTime @default(now())
+}
