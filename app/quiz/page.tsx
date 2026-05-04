@@ -1,175 +1,176 @@
-"use client";
+import Link from "next/link";
 
-import { useMemo, useState } from "react";
-
-const questions = [
+const quizCategories = [
   {
-    question: "When you face a difficult decision, what do you usually do?",
-    answers: [
-      { text: "I trust my gut immediately", score: 2 },
-      { text: "I analyze every possible outcome", score: 4 },
-      { text: "I ask someone I trust", score: 3 },
-      { text: "I delay it until I must decide", score: 1 },
+    title: "Core Personality",
+    description:
+      "Understand your natural thinking style, emotional patterns, and inner motivations.",
+    quizzes: [
+      {
+        title: "Who Are You Really?",
+        description:
+          "A quick psychological profile based on how you think, react, and make decisions.",
+        href: "/quiz/test1",
+        label: "5 questions",
+      },
+      {
+        title: "Thinker or Doer?",
+        description:
+          "Find out whether you naturally analyze, act, observe, or build.",
+        href: "#",
+        label: "Coming soon",
+      },
     ],
   },
   {
-    question: "What drains your energy the most?",
-    answers: [
-      { text: "Too much social interaction", score: 4 },
-      { text: "Lack of progress", score: 3 },
-      { text: "Conflict with others", score: 2 },
-      { text: "Routine and boredom", score: 1 },
+    title: "Emotional Patterns",
+    description:
+      "Explore how you respond to pressure, conflict, stress, and emotional uncertainty.",
+    quizzes: [
+      {
+        title: "How Do You Handle Stress?",
+        description:
+          "Discover your hidden stress response and what it says about your personality.",
+        href: "#",
+        label: "Coming soon",
+      },
+      {
+        title: "Are You Emotionally Reactive?",
+        description:
+          "Measure how quickly emotions influence your decisions and relationships.",
+        href: "#",
+        label: "Coming soon",
+      },
     ],
   },
   {
-    question: "How do you usually handle stress?",
-    answers: [
-      { text: "I stay calm and solve the problem", score: 4 },
-      { text: "I overthink everything", score: 2 },
-      { text: "I distract myself", score: 1 },
-      { text: "I talk it out with someone", score: 3 },
+    title: "Mindset & Growth",
+    description:
+      "Reveal your discipline, ambition, resilience, and relationship with personal progress.",
+    quizzes: [
+      {
+        title: "Builder or Dreamer?",
+        description:
+          "Find out whether your mindset is driven more by vision, action, freedom, or mastery.",
+        href: "#",
+        label: "Coming soon",
+      },
+      {
+        title: "How Disciplined Are You?",
+        description:
+          "A short test about consistency, self-control, and long-term focus.",
+        href: "#",
+        label: "Coming soon",
+      },
     ],
   },
   {
-    question: "What motivates you the most?",
-    answers: [
-      { text: "Freedom", score: 1 },
-      { text: "Achievement", score: 4 },
-      { text: "Connection", score: 2 },
-      { text: "Understanding myself", score: 3 },
-    ],
-  },
-  {
-    question: "Which sentence sounds most like you?",
-    answers: [
-      { text: "I want to understand why I am the way I am.", score: 3 },
-      { text: "I want to become stronger and more disciplined.", score: 4 },
-      { text: "I want peace and emotional balance.", score: 2 },
-      { text: "I want more excitement and freedom.", score: 1 },
+    title: "Relationships & Social Energy",
+    description:
+      "Understand how you connect with people, protect your energy, and build trust.",
+    quizzes: [
+      {
+        title: "Introvert, Extrovert, or Ambivert?",
+        description:
+          "Discover how your social energy really works beneath the surface.",
+        href: "#",
+        label: "Coming soon",
+      },
+      {
+        title: "What Kind of Friend Are You?",
+        description:
+          "Explore your loyalty, emotional availability, and communication style.",
+        href: "#",
+        label: "Coming soon",
+      },
     ],
   },
 ];
 
-function getResult(score: number) {
-  if (score <= 8) {
-    return {
-      title: "The Free Spirit",
-      description:
-        "You value freedom, variety, and independence. You dislike feeling trapped and you are at your best when life feels open and flexible.",
-    };
-  }
+export default function QuizHubPage() {
+  return (
+    <main className="relative min-h-screen overflow-hidden px-4 py-10 text-white">
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{
+          backgroundImage: "url('/img/landing-page-bg-image.png')",
+        }}
+      />
 
-  if (score <= 13) {
-    return {
-      title: "The Emotional Navigator",
-      description:
-        "You are sensitive to your environment and deeply aware of emotions. You often understand what others feel before they say it.",
-    };
-  }
+      <div className="absolute inset-0 bg-black/75" />
 
-  if (score <= 17) {
-    return {
-      title: "The Deep Thinker",
-      description:
-        "You naturally search for meaning. You analyze your behavior, your choices, and the hidden patterns behind your personality.",
-    };
-  }
-
-  return {
-    title: "The Builder",
-    description:
-      "You are driven by growth, progress, and self-mastery. You want to improve yourself and you are willing to do the work.",
-  };
-}
-
-export default function QuizPage() {
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [score, setScore] = useState(0);
-  const [isFinished, setIsFinished] = useState(false);
-
-  const currentQuestion = questions[currentQuestionIndex];
-  const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
-
-  const result = useMemo(() => getResult(score), [score]);
-
-  const handleAnswer = (answerScore: number) => {
-    const newScore = score + answerScore;
-
-    if (currentQuestionIndex === questions.length - 1) {
-      setScore(newScore);
-      setIsFinished(true);
-      return;
-    }
-
-    setScore(newScore);
-    setCurrentQuestionIndex((previous) => previous + 1);
-  };
-
-  const restartQuiz = () => {
-    setCurrentQuestionIndex(0);
-    setScore(0);
-    setIsFinished(false);
-  };
-
-  if (isFinished) {
-    return (
-      <main className="min-h-screen bg-[#0b1020] px-4 py-10 text-white">
-        <section className="mx-auto flex min-h-[80vh] max-w-2xl flex-col items-center justify-center text-center">
-          <p className="mb-3 text-sm uppercase tracking-[0.3em] text-purple-300">
-            Your MindProfile result
+      <section className="relative z-10 mx-auto max-w-6xl">
+        <div className="mb-12 text-center">
+          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.35em] text-purple-300">
+            MindProfile Assessments
           </p>
 
           <h1 className="mb-5 text-4xl font-bold md:text-6xl">
-            {result.title}
+            Choose What You Want to Discover
           </h1>
 
-          <p className="mb-8 text-lg leading-8 text-slate-300">
-            {result.description}
+          <p className="mx-auto max-w-2xl text-lg leading-8 text-gray-200">
+            Explore structured, psychology-inspired quizzes designed to reveal
+            patterns in your personality, emotions, mindset, and relationships.
           </p>
-
-          <button
-            onClick={restartQuiz}
-            className="rounded-full bg-white px-7 py-3 font-semibold text-black transition hover:scale-105"
-          >
-            Take the quiz again
-          </button>
-        </section>
-      </main>
-    );
-  }
-
-  return (
-    <main className="min-h-screen bg-[#0b1020] px-4 py-10 text-white">
-      <section className="mx-auto flex min-h-[80vh] max-w-2xl flex-col justify-center">
-        <div className="mb-8">
-          <div className="mb-3 flex justify-between text-sm text-slate-400">
-            <span>
-              Question {currentQuestionIndex + 1} of {questions.length}
-            </span>
-            <span>{Math.round(progress)}%</span>
-          </div>
-
-          <div className="h-2 overflow-hidden rounded-full bg-slate-800">
-            <div
-              className="h-full rounded-full bg-purple-400 transition-all"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
         </div>
 
-        <h1 className="mb-8 text-3xl font-bold leading-tight md:text-5xl">
-          {currentQuestion.question}
-        </h1>
-
-        <div className="grid gap-4">
-          {currentQuestion.answers.map((answer) => (
-            <button
-              key={answer.text}
-              onClick={() => handleAnswer(answer.score)}
-              className="rounded-2xl border border-white/10 bg-white/5 p-5 text-left text-lg transition hover:scale-[1.02] hover:bg-white/10"
+        <div className="grid gap-8">
+          {quizCategories.map((category) => (
+            <section
+              key={category.title}
+              className="rounded-3xl border border-white/15 bg-white/10 p-6 shadow-2xl backdrop-blur-xl md:p-8"
             >
-              {answer.text}
-            </button>
+              <div className="mb-6">
+                <h2 className="mb-2 text-2xl font-bold md:text-3xl">
+                  {category.title}
+                </h2>
+
+                <p className="max-w-3xl text-gray-300">
+                  {category.description}
+                </p>
+              </div>
+
+              <div className="grid gap-4 md:grid-cols-2">
+                {category.quizzes.map((quiz) => {
+                  const isAvailable = quiz.href !== "#";
+
+                  const cardContent = (
+                    <div
+                      className={`h-full rounded-2xl border border-white/10 bg-black/25 p-5 transition ${
+                        isAvailable
+                          ? "hover:scale-[1.02] hover:bg-white/15"
+                          : "opacity-60"
+                      }`}
+                    >
+                      <div className="mb-4 flex items-center justify-between gap-4">
+                        <h3 className="text-xl font-bold">{quiz.title}</h3>
+
+                        <span className="shrink-0 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-purple-200">
+                          {quiz.label}
+                        </span>
+                      </div>
+
+                      <p className="mb-5 leading-7 text-gray-300">
+                        {quiz.description}
+                      </p>
+
+                      <span className="text-sm font-semibold text-white">
+                        {isAvailable ? "Start quiz →" : "Coming soon"}
+                      </span>
+                    </div>
+                  );
+
+                  return isAvailable ? (
+                    <Link key={quiz.title} href={quiz.href}>
+                      {cardContent}
+                    </Link>
+                  ) : (
+                    <div key={quiz.title}>{cardContent}</div>
+                  );
+                })}
+              </div>
+            </section>
           ))}
         </div>
       </section>
