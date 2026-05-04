@@ -18,19 +18,23 @@ export const metadata: Metadata = {
   title: "Know thyself",
   description:
     "A platform for self-discovery through psychology-inspired quizzes!",
+  other: {
+    "google-adsense-account": "ca-pub-5898197140093966",
+  },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
+        {/* ✅ CRITICAL: must be BEFORE interactive */}
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5898197140093966"
