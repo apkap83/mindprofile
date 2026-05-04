@@ -96,8 +96,25 @@ export default function QuizPage() {
     const newScore = score + answerScore;
 
     if (currentQuestionIndex === questions.length - 1) {
-      setScore(newScore);
+      const finalScore = score + answerScore;
+
+      setScore(finalScore);
       setIsFinished(true);
+
+      // 🔥 SAVE TO DB
+      fetch("/api/quiz-result", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          score: finalScore,
+          result: getResult(finalScore).title,
+          quizSlug: "test1",
+          answers: {}, // later you can store detailed answers
+        }),
+      });
+
       return;
     }
 
