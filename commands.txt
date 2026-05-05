@@ -1,5 +1,9 @@
+# Schema Migration for Dev & Prod
 1. αλλάζεις schema.prisma
 2. pnpm prisma migrate dev   (creates migration)
 3. git commit migrations
 4. git push
 5. Vercel → prisma migrate deploy
+
+# Seed Production DB
+npx dotenv -e .env.production -- pnpm prisma db seed
