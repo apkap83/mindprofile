@@ -7,7 +7,7 @@ export default function Home() {
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: "url('/img/landing-page-bg-image.png')",
+          backgroundImage: "url('/img/landing-background-image.webp')",
         }}
       />
 
