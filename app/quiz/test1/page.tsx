@@ -205,7 +205,7 @@ export default function QuizPage() {
               onClick={() => handleAnswer(answer.score)}
               className="rounded-2xl border border-white/10 bg-white/5 p-5 text-left text-lg transition hover:scale-[1.02] hover:bg-white/10"
             >
-              {answer.text}
+              {answer.text} {answer.score}
             </button>
           ))}
         </div>

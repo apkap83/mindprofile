@@ -28,7 +28,7 @@ export default function Home() {
 
           <Link
             href="/quiz"
-            className="bg-white text-black px-6 py-3 rounded-xl text-lg font-semibold hover:scale-105 transition shadow-lg"
+            className="bg-white text-black px-6 py-3 rounded-xl text-lg font-semibold hover:scale-115 transition-all shadow-lg"
           >
             Start Your First Quiz 🚀
           </Link>
