@@ -7,3 +7,5 @@
 
 # Seed Production DB
 npx dotenv -e .env.production -- pnpm prisma db seed
+
+Test
