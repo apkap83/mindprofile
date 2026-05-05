@@ -41,7 +41,7 @@ const quizData = {
 async function main() {
   await prisma.quiz.upsert({
     where: { slug: quizData.slug },
-    update: {},
+    update: quizData,
     create: quizData,
   });
 

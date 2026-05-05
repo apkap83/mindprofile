@@ -14,6 +14,13 @@ const quizCategories = [
         label: "5 questions",
       },
       {
+        title: "Deep Personality Scan",
+        description:
+          "A deeper assessment based on five major personality dimensions: openness, discipline, social energy, empathy, and emotional sensitivity.",
+        href: "/quiz/deep-personality",
+        label: "20 questions",
+      },
+      {
         title: "Thinker or Doer?",
         description:
           "Find out whether you naturally analyze, act, observe, or build.",
@@ -22,6 +29,7 @@ const quizCategories = [
       },
     ],
   },
+
   {
     title: "Emotional Patterns",
     description:
