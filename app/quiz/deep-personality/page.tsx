@@ -1,8 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
 import { Check } from "lucide-react";
-
 type Dimension = "O" | "C" | "E" | "A" | "N";
 
 type Question = {
@@ -329,7 +329,16 @@ export default function DeepPersonalityQuizPage() {
     <main className="relative min-h-screen overflow-hidden px-4 py-10 text-white">
       <Background />
 
-      <section className="relative z-10 mx-auto max-w-3xl">
+      <div className="absolute z-10 top-2.5 left-2.5 w-full mr-2.5 text-center border border-gray-700 rounded-md p-2 bg-black pointer-events-auto ">
+        <Link
+          href={"/quiz"}
+          className="inline-flex items-center gap-2 text-sm text-gray-400"
+        >
+          ← Back
+        </Link>
+      </div>
+
+      <section className="relative z-10 mx-auto max-w-3xl mt-10 lg:mt-0">
         <div className="mb-8">
           <div className="mb-2 flex justify-between text-sm font-semibold text-white/80">
             <span>{Math.round(progress)}%</span>
@@ -359,7 +368,7 @@ export default function DeepPersonalityQuizPage() {
               className="flex flex-col items-center gap-2"
             >
               <div
-                className={`h-11 w-11 rounded-full border-2 ${option.className}`}
+                className={`h-5 w-5 rounded-full border-2 ${option.className}`}
               />
               <span>{option.text}</span>
             </div>
@@ -404,7 +413,7 @@ export default function DeepPersonalityQuizPage() {
                           }`}
                         >
                           {isSelected && (
-                            <Check className="h-7 w-7 stroke-[4] text-black" />
+                            <Check className="h-7 w-7 stroke-4 text-black" />
                           )}
                         </span>
                       </button>
